@@ -1,10 +1,8 @@
-package Test220201;
+package Test220502;
 
 import java.util.concurrent.TimeUnit;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import java.util.UUID;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.After;
@@ -15,12 +13,9 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.interactions.Actions;
 
-public class GenerarFolio {
+
+public class GenerarFolioTMT220502 {
     public WebDriver driver;
-    String uuid = UUID.randomUUID().toString();
-    int longitudDeseada = 16;
-    String llavePago = uuid.replace("-", "").substring(0, longitudDeseada);
-    //String llavePago = "D6FE4RG57TU6YIHMO";
 
     @Before
     public void inicializar() {
@@ -29,14 +24,14 @@ public class GenerarFolio {
     }
 
     @Test
-    public void GenerarFolio() throws InterruptedException {
+    public void GenerarFolioTMT220502() throws InterruptedException {
 //Inicia la pagina.
         driver.get("https://wwwqa.ventanillaunica.gob.mx/ventanilla-HA/authentication.action?showLogin=");
         driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
         driver.manage().window().maximize();
 
 //Login con firma.
-        Test220201.FirmaSoli firmaSoli = new FirmaSoli(driver);
+        Test220502.FirmaSoli firmaSoli = new FirmaSoli(driver);
         firmaSoli.firmarsolicitante();
         WebElement fileingresar = driver.findElement(By.className("btn-primary"));
         fileingresar.click();
@@ -65,12 +60,12 @@ public class GenerarFolio {
         CerSoliReq.click();
 
 //subcatalogo
-        WebElement rDocumental =driver.findElement(By.xpath("//*[@id=\"servicios\"]/ul/li/ul/li[2]/a"));
+        WebElement rDocumental =driver.findElement(By.xpath("//*[@id=\"servicios\"]/ul/li/ul/li[4]/a"));
         rDocumental.click();
 
 //seleccion de tramite
-        WebElement tramite_220201 =driver.findElement(By.xpath("//*[@id=\"servicios\"]/ul/li/ul/li[2]/ul/li[1]/a"));
-        tramite_220201.click();
+        WebElement tramite_220502 =driver.findElement(By.xpath("//*[@id=\"servicios\"]/ul/li/ul/li[4]/ul/li[2]/a"));
+        tramite_220502.click();
 
 //selecciona pestaña "Datos de la Solicitud"
         WebElement solicitud =driver.findElement(By.xpath("//*[@id=\"ui-id-2\"]"));
@@ -78,26 +73,39 @@ public class GenerarFolio {
 
 //flujo corto
 //dar Dobleclick sobre un registro para cargar los datos de uno previo
-        dobleClickEnElemento("//*[@id=\"5\"]/td[5]");
+        dobleClickEnElemento("//*[@id=\"3\"]/td[5]");
 
 //con los datos precargados pasamos a continuar
         WebElement btnContinuar = driver.findElement(By.xpath("//*[@id=\"guardarSolicitud\"]"));
         btnContinuar.click();
+        Thread.sleep(3000);
 
-        WebElement llavePagoE = driver.findElement(By.xpath("//*[@id=\"solicitud.pago.llaveDePago\"]"));
-                llavePagoE.sendKeys(llavePago);
+        WebElement metodoTrans = driver.findElement(By.xpath("//*[@id=\"solicitud.transporte.ideMedioTransporte\"]"));
+        metodoTrans.sendKeys("Terrestre");
+        Thread.sleep(3000);
 
-        //Selección de fecha con calendario
-        WebElement fechaPago = driver.findElement(By.xpath("//*[@id=\"calendarTo\"]"));
-        fechaPago.sendKeys("14/08/2024");
-        llavePagoE.click();
-        // una vez cargados los datos daremos continuar
-        WebElement btnCont = driver.findElement(By.xpath("//*[@id=\"guardarSolicitud\"]"));
-        btnCont.click();
+        WebElement sI = driver.findElement(By.xpath("//*[@id=\"SiSolicitudFerros\"]"));
+        sI.click();
+        Thread.sleep(3000);
 
-        //seleccione tipo de documento
-        WebElement tipoDoc = driver.findElement(By.id("selectDoctosEspecificos"));
-        tipoDoc.sendKeys("Certificado de Control de Calidad");
+        WebElement check = driver.findElement(By.xpath("//*[@id=\"jqg_gridSagarpa2205_3\"]"));
+        check.click();
+        Thread.sleep(3000);
+
+        WebElement btnModificar = driver.findElement(By.xpath("//*[@id=\"btnSaldoMercancia\"]"));
+        btnModificar.click();
+        Thread.sleep(3000);
+
+        WebElement UMT = driver.findElement(By.xpath("//*[@id=\"frmSaldos\"]/div[5]/div/div/input"));
+        UMT.sendKeys("1");
+        Thread.sleep(3000);
+
+        WebElement btnContMod = driver.findElement(By.xpath("//*[@id=\"frmSaldos\"]/div[6]/div[3]/div/input[2]"));
+        btnContMod.click();
+        Thread.sleep(3000);
+
+        WebElement btnContinuar2 = driver.findElement(By.xpath("//*[@id=\"guardarSolicitud\"]"));
+        btnContinuar2.click();
 
         WebElement btnConti = driver.findElement(By.xpath("//*[@id=\"workingArea\"]/form/div[4]/div/div/input[2]"));
         btnConti.click();
@@ -127,7 +135,9 @@ public class GenerarFolio {
             System.out.println("No se encontró el número de folio.");
         }
 
-    }
+
+
+}
 
     public void dobleClickEnElemento(String xpath) {
         // Encuentra el elemento usando el XPath proporcionado
@@ -148,5 +158,6 @@ public class GenerarFolio {
             e.printStackTrace();
         }
         driver.close(); // Cierra el navegador
-    }
+   }
+
 }
