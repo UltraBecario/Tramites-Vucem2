@@ -71,46 +71,36 @@ public class GenerarFolioTMT220502 {
         WebElement solicitud =driver.findElement(By.xpath("//*[@id=\"ui-id-2\"]"));
         solicitud.click();
 
-//flujo corto
-//dar Dobleclick sobre un registro para cargar los datos de uno previo
-        dobleClickEnElemento("//*[@id=\"3\"]/td[5]");
+//Nueva Captura
+        WebElement mas = driver.findElement(By.xpath("//*[@id=\"accordion\"]/div/div[1]/button"));
+        mas.click();
 
-//con los datos precargados pasamos a continuar
-        WebElement btnContinuar = driver.findElement(By.xpath("//*[@id=\"guardarSolicitud\"]"));
-        btnContinuar.click();
-        Thread.sleep(3000);
+//llenar info
+        WebElement NumAutorizacion = driver.findElement(By.id("solicitud.numAutorizacion"));
+        WebElement NumAutorizacionSol = NumAutorizacion.findElement(By.xpath("//*[@id=\"solicitud.numAutorizacion\"]/option[3]"));
+        NumAutorizacionSol.click();
 
-        WebElement metodoTrans = driver.findElement(By.xpath("//*[@id=\"solicitud.transporte.ideMedioTransporte\"]"));
-        metodoTrans.sendKeys("Terrestre");
-        Thread.sleep(3000);
+        WebElement FechaInspeccion = driver.findElement(By.xpath("/html/body/main/div/div[4]/div/form/div[2]/div/div[2]/div[2]/div[2]/div/input"));
+        FechaInspeccion.click();
+        WebElement FechaInspeccionSol = driver.findElement(By.xpath("//*[@id=\"ui-datepicker-div\"]/table/tbody/tr[4]/td[5]/a"));
+        FechaInspeccionSol.click();
 
-        WebElement sI = driver.findElement(By.xpath("//*[@id=\"SiSolicitudFerros\"]"));
-        sI.click();
-        Thread.sleep(3000);
+        WebElement hora = driver.findElement(By.xpath("//*[@id=\"horaInspeccion\"]"));
+        hora.sendKeys("03:30");
 
-        WebElement check = driver.findElement(By.xpath("//*[@id=\"jqg_gridSagarpa2205_3\"]"));
-        check.click();
-        Thread.sleep(3000);
+        WebElement cantidad = driver.findElement(By.xpath("//*[@id=\"solicitud.numeroTotalCarros\"]"));
+        cantidad.sendKeys("1");
 
-        WebElement btnModificar = driver.findElement(By.xpath("//*[@id=\"btnSaldoMercancia\"]"));
-        btnModificar.click();
-        Thread.sleep(3000);
+        WebElement no = driver.findElement(By.xpath("//*[@id=\"NoSolicitudFerros\"]"));
+        no.click();
 
-        WebElement UMT = driver.findElement(By.xpath("//*[@id=\"frmSaldos\"]/div[5]/div/div/input"));
-        UMT.sendKeys("1");
-        Thread.sleep(3000);
-
-        WebElement btnContMod = driver.findElement(By.xpath("//*[@id=\"frmSaldos\"]/div[6]/div[3]/div/input[2]"));
-        btnContMod.click();
-        Thread.sleep(3000);
-
-        WebElement btnContinuar2 = driver.findElement(By.xpath("//*[@id=\"guardarSolicitud\"]"));
-        btnContinuar2.click();
+        WebElement btnContinue = driver.findElement(By.xpath("//*[@id=\"guardarSolicitud\"]"));
+        btnContinue.click();
 
         WebElement btnConti = driver.findElement(By.xpath("//*[@id=\"workingArea\"]/form/div[4]/div/div/input[2]"));
         btnConti.click();
 
-//Firma final del tramite
+        //Firma final del tramite
         firmaSoli.firmarsolicitante();
         WebElement btnFirmar = driver.findElement(By.xpath("//*[@id=\"btnSubmit\"]"));
         btnFirmar.click();
@@ -135,20 +125,7 @@ public class GenerarFolioTMT220502 {
             System.out.println("No se encontró el número de folio.");
         }
 
-
-
 }
-
-    public void dobleClickEnElemento(String xpath) {
-        // Encuentra el elemento usando el XPath proporcionado
-        WebElement cargaDatos = driver.findElement(By.xpath(xpath));
-
-        // Crea una instancia de Actions
-        Actions actions = new Actions(driver);
-
-        // Realiza un doble clic en el elemento
-        actions.doubleClick(cargaDatos).perform();
-    }
 
     @After
     public void finalizar() {
@@ -157,7 +134,7 @@ public class GenerarFolioTMT220502 {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        driver.close(); // Cierra el navegador
+//        driver.close(); // Cierra el navegador
    }
 
 }
