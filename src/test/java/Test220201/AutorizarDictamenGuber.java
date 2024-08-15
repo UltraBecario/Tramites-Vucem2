@@ -14,7 +14,7 @@ import org.openqa.selenium.interactions.Actions;
 
 public class AutorizarDictamenGuber {
     public WebDriver driver;
-    String folioGenerado = "1502200200120240302000007";
+    String folioGenerado = "1502200200120240302000010";
 
     @Before
     public void inicializar() {
