@@ -77,22 +77,40 @@ public class GenerarFolioTMT220502 {
 
 //llenar info
         WebElement NumAutorizacion = driver.findElement(By.id("solicitud.numAutorizacion"));
-        WebElement NumAutorizacionSol = NumAutorizacion.findElement(By.xpath("//*[@id=\"solicitud.numAutorizacion\"]/option[3]"));
-        NumAutorizacionSol.click();
+        NumAutorizacion.sendKeys("23039012024000197");
+        Thread.sleep(5000);
+        NumAutorizacion.sendKeys("23039012024000197");
 
-        WebElement FechaInspeccion = driver.findElement(By.xpath("/html/body/main/div/div[4]/div/form/div[2]/div/div[2]/div[2]/div[2]/div/input"));
+//        WebElement NumAutorizacionSol = NumAutorizacion.findElement(By.xpath("//*[@id=\"solicitud.numAutorizacion\"]/option[2]"));
+//        NumAutorizacionSol.isEnabled();
+
+        WebElement FechaInspeccion = driver.findElement(By.xpath("//*[@id=\"solicitud.fechaInspeccion\"]"));
         FechaInspeccion.click();
-        WebElement FechaInspeccionSol = driver.findElement(By.xpath("//*[@id=\"ui-datepicker-div\"]/table/tbody/tr[4]/td[5]/a"));
-        FechaInspeccionSol.click();
+        WebElement fecha = driver.findElement(By.xpath("//*[@id=\"ui-datepicker-div\"]/table/tbody/tr[5]/td[5]/a"));
+        fecha.click();
+
+        WebElement body = driver.findElement(By.xpath("/html/body"));
+        body.click();
 
         WebElement hora = driver.findElement(By.xpath("//*[@id=\"horaInspeccion\"]"));
         hora.sendKeys("03:30");
+        body.click();
 
         WebElement cantidad = driver.findElement(By.xpath("//*[@id=\"solicitud.numeroTotalCarros\"]"));
         cantidad.sendKeys("1");
+        body.click();
 
-        WebElement no = driver.findElement(By.xpath("//*[@id=\"NoSolicitudFerros\"]"));
-        no.click();
+        WebElement check = driver.findElement(By.xpath("/html/body/main/div/div[4]/div/form/div[2]/div/div[2]/div[14]/div/div/div[3]/div[3]/div/table/tbody/tr[2]/td[2]/input"));
+        check.click();
+
+        WebElement btnModi = driver.findElement(By.xpath("//*[@id=\"btnSaldoMercancia\"]"));
+        btnModi.click();
+
+        WebElement UMT = driver.findElement(By.xpath("//*[@id=\"frmSaldos\"]/div[5]/div/div/input"));
+        UMT.sendKeys("1");
+
+        WebElement btnAcep = driver.findElement(By.xpath("//*[@id=\"frmSaldos\"]/div[6]/div[3]/div/input[2]"));
+        btnAcep.click();
 
         WebElement btnContinue = driver.findElement(By.xpath("//*[@id=\"guardarSolicitud\"]"));
         btnContinue.click();
