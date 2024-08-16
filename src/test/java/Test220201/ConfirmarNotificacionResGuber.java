@@ -14,11 +14,11 @@ import org.openqa.selenium.interactions.Actions;
 
 public class ConfirmarNotificacionResGuber {
     public WebDriver driver;
-    String folioGenerado = "1502200200120240302000010";
+    String folioGenerado = "1502200200120240302000031";
 
     @Before
     public void inicializar() {
-        System.setProperty("webdriver.chrome.driver", "C:\\Users\\JNoeMC\\Desktop\\Practica Selenium\\PJ3\\TramitesVucem\\SELENIUM_TESTING\\src\\test\\resources\\Cargadocumento\\chromedriver.exe");
+        System.setProperty("webdriver.chrome.driver", "C:\\Users\\jozz1\\Desktop\\Practica Selenium\\PJ3\\TramitesVucem\\SELENIUM_TESTING\\src\\test\\resources\\Cargadocumento\\chromedriver.exe");
         driver = new ChromeDriver();
     }
 
