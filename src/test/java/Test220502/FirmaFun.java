@@ -14,15 +14,15 @@ public class FirmaFun {
     }
     @Before
     public void inicializar() {
-        System.setProperty("webdriver.chrome.driver", "C:\\Users\\jozz1\\Desktop\\Practica Selenium\\PJ3\\TramitesVucem\\SELENIUM_TESTING\\src\\test\\resources\\Cargadocumento\\chromedriver.exe");
+        System.setProperty("webdriver.chrome.driver", "C:\\Users\\JNoeMC\\IdeaProjects\\Tramites-Vucem2\\src\\test\\resources\\Cargadocumento\\chromedriver.exe");
         driver = new ChromeDriver();
     }
 
     public void firmarfuncionario() {
         WebElement fileCertificadofinal = driver.findElement(By.id("certificate"));
-        fileCertificadofinal.sendKeys("C:\\Users\\jozz1\\Desktop\\Practica Selenium\\PJ3\\TramitesVucem\\SELENIUM_TESTING\\src\\test\\resources\\Cargadocumento\\CredFunc\\mavl621207c95.cer");
+        fileCertificadofinal.sendKeys("C:\\Users\\JNoeMC\\IdeaProjects\\Tramites-Vucem2\\src\\test\\resources\\Cargadocumento\\CredFunc\\mavl621207c95.cer");
         WebElement filellavefinal = driver.findElement(By.id("privateKey"));
-        filellavefinal.sendKeys("C:\\Users\\jozz1\\Desktop\\Practica Selenium\\PJ3\\TramitesVucem\\SELENIUM_TESTING\\src\\test\\resources\\Cargadocumento\\CredFunc\\MAVL621207C95_1012241424.key");
+        filellavefinal.sendKeys("C:\\Users\\JNoeMC\\IdeaProjects\\Tramites-Vucem2\\src\\test\\resources\\Cargadocumento\\CredFunc\\MAVL621207C95_1012241424.key");
         WebElement filepasswordfinal = driver.findElement(By.id("privateKeyPassword"));
         filepasswordfinal.sendKeys("delfin40");
 

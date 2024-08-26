@@ -13,6 +13,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.interactions.Actions;
 
 public class GenerarFolio {
@@ -20,17 +21,23 @@ public class GenerarFolio {
     String uuid = UUID.randomUUID().toString();
     int longitudDeseada = 16;
     String llavePago = uuid.replace("-", "").substring(0, longitudDeseada);
-    //String llavePago = "D6FE4RG57TU6YIHMO";
 
     @Before
     public void inicializar() {
-        System.setProperty("webdriver.chrome.driver", "C:\\Users\\jozz1\\Desktop\\Practica Selenium\\PJ3\\TramitesVucem\\Tramites-Vucem2\\src\\test\\resources\\Cargadocumento\\chromedriver.exe");
-        driver = new ChromeDriver();
+        System.setProperty("webdriver.chrome.driver", "C:\\Users\\JNoeMC\\IdeaProjects\\Tramites-Vucem2\\src\\test\\resources\\Cargadocumento\\chromedriver.exe");
+
+        ChromeOptions chromeOptions = new ChromeOptions();
+        chromeOptions.addArguments("--remote-allow-origins=*");
+        chromeOptions.addArguments(new String[] { "--disablenotifications"});
+        chromeOptions.setCapability("acceptInsecureCerts", true);
+        driver = new ChromeDriver(chromeOptions);
+
     }
 
     @Test
     public void GenerarFolio() throws InterruptedException {
 //Inicia la pagina.
+        driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
         driver.get("https://wwwqa.ventanillaunica.gob.mx/ventanilla-HA/authentication.action?showLogin=");
         driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
         driver.manage().window().maximize();
@@ -147,6 +154,6 @@ public class GenerarFolio {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        driver.close(); // Cierra el navegador
+//        driver.close(); // Cierra el navegador
     }
 }
