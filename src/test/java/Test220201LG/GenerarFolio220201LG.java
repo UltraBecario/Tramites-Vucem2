@@ -1,10 +1,10 @@
-package Test220201;
-
+package Test220201LG;
 import java.util.concurrent.TimeUnit;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.UUID;
 
+import Test220201.FirmaSoli;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.After;
@@ -15,8 +15,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.interactions.Actions;
-
-public class GenerarFolio {
+public class GenerarFolio220201LG {
     public WebDriver driver;
     String uuid = UUID.randomUUID().toString();
     int longitudDeseada = 16;
@@ -83,16 +82,94 @@ public class GenerarFolio {
         WebElement solicitud =driver.findElement(By.xpath("//*[@id=\"ui-id-2\"]"));
         solicitud.click();
 
-//flujo corto
-//dar Dobleclick sobre un registro para cargar los datos de uno previo
-        dobleClickEnElemento("//*[@id=\"5\"]/td[5]");
+        WebElement btnNuevoRegister = driver.findElement(By.xpath("//*[@id=\"accordion\"]/div/div[1]/button"));
+        btnNuevoRegister.click();
+
+        WebElement selecIngAdua = driver.findElement(By.xpath("//*[@id=\"solicitud.claveAduana\"]"));
+        selecIngAdua.sendKeys("ACAPULCO, GRO.");
+
+        WebElement selecOfi = driver.findElement(By.xpath("//*[@id=\"solicitud.oficinaInspeccionAgropecuaria.clave\"]"));
+        selecOfi.sendKeys("Acapulco");
+
+        WebElement selecPuntInsp = driver.findElement(By.xpath("//*[@id=\"solicitud.unidadAdministrativaRepresentacionFederal.clave\"]"));
+        selecPuntInsp.sendKeys("Acapulco Oficina de Inspección");
+
+        WebElement regimn = driver.findElement(By.xpath("//*[@id=\"solicitud.regimen.clave\"]"));
+        regimn.sendKeys("Definitivos");
+
+        WebElement select = driver.findElement(By.name("solicitud.tipoMercancia"));
+        select.click();
+
+        WebElement btnAgregar = driver.findElement(By.xpath("//*[@id=\"btnAgregarMercanciasA\"]"));
+        btnAgregar.click();
+
+        WebElement tipReq = driver.findElement(By.xpath("//*[@id=\"mercanciaGrid.idTipoRequisito\"]"));
+        tipReq.sendKeys("Inspección Ocular");
+
+        WebElement req = driver.findElement(By.xpath("//*[@id=\"requisitos\"]"));
+        req.sendKeys("Requisito");
+
+        WebElement nCertInt = driver.findElement(By.xpath("//*[@id=\"numeroCertificado\"]"));
+        nCertInt.sendKeys("12356");
+
+        WebElement fracAranc = driver.findElement(By.xpath("//*[@id=\"mercanciaGrid.fraccionArancelaria.clave\"]"));
+        fracAranc.sendKeys("01039201");
+
+        WebElement nico = driver.findElement(By.xpath("//*[@id=\"idFraccionNico\"]"));
+        nico.sendKeys("00");
+
+        WebElement desc = driver.findElement(By.xpath("//*[@id=\"mostrarDescripcionFraccionUsuario\"]"));
+        desc.sendKeys("Esta es una prueba de automatización");
+
+        WebElement umt = driver.findElement(By.xpath("//*[@id=\"cantidadUMT\"]"));
+        umt.sendKeys("1000000");
+
+        WebElement umc = driver.findElement(By.xpath("//*[@id=\"cantidadUMC\"]"));
+        umc.sendKeys("1000000");
+
+        WebElement espec = driver.findElement(By.xpath("//*[@id=\"mercanciaGrid.idEspecie\"]"));
+        espec.sendKeys("Canino");
+
+        WebElement pais = driver.findElement(By.xpath("//*[@id=\"mercanciaGrid.clavesPaisesProcedencia\"]"));
+        pais.sendKeys("ANTARTIDA");
+
+        WebElement umC = driver.findElement(By.xpath("//*[@id=\"mercanciaGrid.unidadMedidaComercial.clave\"]"));
+        umC.sendKeys("Docenas");
+
+        WebElement Uso = driver.findElement(By.xpath("//*[@id=\"mercanciaGrid.idUso\"]"));
+        Uso.sendKeys("Animal");
+
+        WebElement paiS = driver.findElement(By.xpath("//*[@id=\"mercanciaGrid.clavesPaisesOrigen\"]"));
+        paiS.sendKeys("ANTARTIDA");
+
+        WebElement btnPorArch = driver.findElement(By.xpath("//*[@id=\"btnAgregarDetalleMasiva\"]"));
+        btnPorArch.click();
+
+        WebElement btnCargar = driver.findElement(By.xpath("//*[@id=\"fileBean\"]"));
+        btnCargar.sendKeys("C:\\Users\\JNoeMC\\IdeaProjects\\Tramites-Vucem2\\src\\test\\resources\\Cargadocumento\\220201_carga_masiva.txt");
+
+        WebElement btnAgregar2 = driver.findElement(By.xpath("//*[@id=\"uploadFileDetalleM\"]"));
+        btnAgregar2.click();
+
+        WebElement btnCerrar = driver.findElement(By.xpath("//*[@id=\"btnCancelarDetalleMercancia\"]"));
+        btnCerrar.click();
+
+        WebElement btnAgregarRegi = driver.findElement(By.xpath("//*[@id=\"btnAgregarMercancia\"]"));
+        btnAgregarRegi.click();
+
+
+
+
+
+
+
 
 //con los datos precargados pasamos a continuar
         WebElement btnContinuar = driver.findElement(By.xpath("//*[@id=\"guardarSolicitud\"]"));
         btnContinuar.click();
 
         WebElement llavePagoE = driver.findElement(By.xpath("//*[@id=\"solicitud.pago.llaveDePago\"]"));
-                llavePagoE.sendKeys(llavePago);
+        llavePagoE.sendKeys(llavePago);
 
         //Selección de fecha con calendario
         WebElement fechaPago = driver.findElement(By.xpath("//*[@id=\"calendarTo\"]"));
@@ -133,6 +210,10 @@ public class GenerarFolio {
         } else {
             System.out.println("No se encontró el número de folio.");
         }
+
+
+
+
 
     }
 
