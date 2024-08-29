@@ -14,8 +14,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.interactions.Actions;
-public class GenerarFolio220201LG {
+
+public class GenerarFolio220201LG1 {
     public WebDriver driver;
     String uuid = UUID.randomUUID().toString();
     int longitudDeseada = 16;
@@ -79,7 +79,7 @@ public class GenerarFolio220201LG {
         tramite_220201.click();
 
 //selecciona pestaña "Datos de la Solicitud"
-        WebElement solicitud =driver.findElement(By.xpath("//*[@id=\"ui-id-2\"]"));
+        WebElement solicitud =driver.findElement(By.id("ui-id-2"));
         solicitud.click();
 
         WebElement btnNuevoRegister = driver.findElement(By.xpath("//*[@id=\"accordion\"]/div/div[1]/button"));
@@ -157,24 +157,131 @@ public class GenerarFolio220201LG {
         WebElement btnAgregarRegi = driver.findElement(By.xpath("//*[@id=\"btnAgregarMercancia\"]"));
         btnAgregarRegi.click();
 
+        WebElement btnGuardParcial = driver.findElement(By.xpath("//*[@id=\"guardarSolicitudParcial\"]"));
+        btnGuardParcial.click();
 
+        //selecciona pestaña "Datos para movilización nacional"
+        WebElement datMovil =driver.findElement(By.xpath("//*[@id=\"ui-id-3\"]"));
+        datMovil.click();
 
+        WebElement transpMetod = driver.findElement(By.xpath("//*[@id=\"solicitud.transporte.ideMedioTransporte\"]"));
+        transpMetod.sendKeys("Marítimo");
 
+        WebElement idTransp = driver.findElement(By.xpath("//*[@id=\"tabs-3\"]/div[2]/div[2]/div[2]/input"));
+        idTransp.sendKeys("020202");
 
+        WebElement punt = driver.findElement(By.xpath("//*[@id=\"solicitud.transporte.puntoVerificacion.idPuntoVerificacion\"]"));
+        punt.sendKeys("Región Norte, El Tepetate en Nuevo León");
 
+        WebElement nomEmpTrans = driver.findElement(By.xpath("//*[@id=\"tabs-3\"]/div[4]/div/div[2]/input"));
+        nomEmpTrans.sendKeys("Maersk Line");
 
+        WebElement btnGuardMD = driver.findElement(By.xpath("//*[@id=\"guardarSolicitudParcial\"]"));
+        btnGuardMD.click();
 
-//con los datos precargados pasamos a continuar
-        WebElement btnContinuar = driver.findElement(By.xpath("//*[@id=\"guardarSolicitud\"]"));
-        btnContinuar.click();
+        //selecciona pestaña "Terceros Relacionados"
+        WebElement terRel =driver.findElement(By.xpath("//*[@id=\"ui-id-4\"]"));
+        terRel.click();
+
+        WebElement btnAgrgExport = driver.findElement(By.xpath("//*[@id=\"agregarTercero_TIPERS_EXP\"]"));
+        btnAgrgExport.click();
+
+        WebElement selecTipPer = driver.findElement(By.name("terceros.tipoPersona"));
+        selecTipPer.click();
+
+        WebElement nomExport = driver.findElement(By.xpath("//*[@id=\"terceros_nombre\"]"));
+        nomExport.sendKeys("Miriam");
+
+        WebElement pApell = driver.findElement(By.xpath("//*[@id=\"terceros_apellidoPaterno\"]"));
+        pApell.sendKeys("Lopez");
+
+        WebElement segApell = driver.findElement(By.xpath("//*[@id=\"terceros_apellidoMaterno\"]"));
+        segApell.sendKeys("Solis");
+
+        WebElement pIs = driver.findElement(By.xpath("//*[@id=\"terceros_selectPais\"]"));
+        pIs.sendKeys("ANGOLA (REPUBLICA DE)");
+
+        WebElement domPrueb = driver.findElement(By.xpath("//*[@id=\"terceros_domicilioExtranjero\"]"));
+        domPrueb.sendKeys("Este es un domicilio de Prueba");
+
+        WebElement lada = driver.findElement(By.xpath("//*[@id=\"terceros_lada\"]"));
+        lada.sendKeys("52");
+
+        WebElement tel = driver.findElement(By.xpath("//*[@id=\"terceros_telefono\"]"));
+        tel.sendKeys("2298456543");
+
+        WebElement meil = driver.findElement(By.xpath("//*[@id=\"terceros_correoElec\"]"));
+        meil.sendKeys("miriam@gmail.com");
+
+        WebElement btnGuardExpor = driver.findElement(By.xpath("//*[@id=\"btnGuardarFrmDatosTercero\"]"));
+        btnGuardExpor.click();
+
+        WebElement btnAgregDest = driver.findElement(By.xpath("//*[@id=\"agregarTercero_TIPERS_DES\"]"));
+        btnAgregDest.click();
+
+        WebElement selecTipPerDest = driver.findElement(By.name("terceros.tipoPersona"));
+        selecTipPerDest.click();
+
+        WebElement nomDest = driver.findElement(By.xpath("//*[@id=\"terceros_nombre\"]"));
+        nomDest.sendKeys("Erick");
+
+        WebElement pApellDest = driver.findElement(By.xpath("//*[@id=\"terceros_apellidoPaterno\"]"));
+        pApell.sendKeys("Martinez");
+
+        WebElement segApellDest = driver.findElement(By.xpath("//*[@id=\"terceros_apellidoMaterno\"]"));
+        segApell.sendKeys("Lopez");
+
+//        WebElement pIsDest = driver.findElement(By.xpath("//*[@id=\"terceros_selectPais\"]"));
+//        pIsDest.sendKeys("MEXICO (ESTADOS UNIDOS MEXICANOS)");
+
+        WebElement cpDest = driver.findElement(By.xpath("//*[@id=\"terceros_codPostal\"]"));
+        cpDest.sendKeys("39550");
+
+        WebElement eSt = driver.findElement(By.xpath("//*[@id=\"terceros_selectEstado\"]"));
+        eSt.sendKeys("GUERRERO");
+
+        WebElement munAlc = driver.findElement(By.xpath("//*[@id=\"terceros_selectMunicipio\"]"));
+        munAlc.sendKeys("ACAPULCO DE JUAREZ");
+
+        WebElement colDest = driver.findElement(By.xpath("//*[@id=\"terceros_selectColonia\"]"));
+        colDest.sendKeys("CUAUHTEMOC - CP 39550");
+
+        WebElement callDest = driver.findElement(By.xpath("//*[@id=\"terceros_calle\"]"));
+        callDest.sendKeys("#10");
+
+        WebElement nExt = driver.findElement(By.xpath("//*[@id=\"terceros_numExterior\"]"));
+        nExt.sendKeys("856");
+
+        WebElement nInt = driver.findElement(By.xpath("//*[@id=\"terceros_numInterior\"]"));
+        nInt.sendKeys("1");
+
+        WebElement ladaDest = driver.findElement(By.xpath("//*[@id=\"terceros_lada\"]"));
+        ladaDest.sendKeys("52");
+
+        WebElement telDest = driver.findElement(By.xpath("//*[@id=\"terceros_telefono\"]"));
+        telDest.sendKeys("2298456543");
+
+        WebElement meilDest = driver.findElement(By.xpath("//*[@id=\"terceros_correoElec\"]"));
+        meilDest.sendKeys("miriam@gmail.com");
+
+        WebElement btnGuardDest = driver.findElement(By.xpath("//*[@id=\"btnGuardarFrmDatosTercero\"]"));
+        btnGuardDest.click();
+
+        //selecciona pestaña "Pago de Derechos"
+        WebElement pagoDer =driver.findElement(By.id("ui-id-5"));
+        pagoDer.click();
+
+        WebElement banSelect = driver.findElement(By.xpath("//*[@id=\"solicitud.pago.banco.clave\"]"));
+        banSelect.sendKeys("BANAMEX");
 
         WebElement llavePagoE = driver.findElement(By.xpath("//*[@id=\"solicitud.pago.llaveDePago\"]"));
         llavePagoE.sendKeys(llavePago);
 
         //Selección de fecha con calendario
         WebElement fechaPago = driver.findElement(By.xpath("//*[@id=\"calendarTo\"]"));
-        fechaPago.sendKeys("14/08/2024");
+        fechaPago.sendKeys("1/08/2024");
         llavePagoE.click();
+
         // una vez cargados los datos daremos continuar
         WebElement btnCont = driver.findElement(By.xpath("//*[@id=\"guardarSolicitud\"]"));
         btnCont.click();
@@ -211,21 +318,6 @@ public class GenerarFolio220201LG {
             System.out.println("No se encontró el número de folio.");
         }
 
-
-
-
-
-    }
-
-    public void dobleClickEnElemento(String xpath) {
-        // Encuentra el elemento usando el XPath proporcionado
-        WebElement cargaDatos = driver.findElement(By.xpath(xpath));
-
-        // Crea una instancia de Actions
-        Actions actions = new Actions(driver);
-
-        // Realiza un doble clic en el elemento
-        actions.doubleClick(cargaDatos).perform();
     }
 
     @After

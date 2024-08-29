@@ -1,18 +1,20 @@
-package Test220201;
-import java.util.concurrent.TimeUnit;
+package Test220201LG;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.After;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.interactions.Actions;
-public class EvaluarSoliGendDic {
+
+import java.util.concurrent.TimeUnit;
+
+public class AutorizarReqGenObserv3 {
     public WebDriver driver;
-    String folioGenerado = "1502200200120240302000046";
+    String folioGenerado = "1502200200120240301000015";
+
 
     @Before
     public void inicializar() {
@@ -21,14 +23,14 @@ public class EvaluarSoliGendDic {
     }
 
     @Test
-    public void EvaluarSoliGendDic() throws InterruptedException {
+    public void AutorizarReqGenObserv3() throws InterruptedException {
 //Inicia la pagina como Funcionario
         driver.get("https://wwwqa.ventanillaunica.gob.mx/ventanilla-HA/authentication.action?showLoginFuncionarios=");
         driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
         driver.manage().window().maximize();
 
 //Login con firma.
-        Test220201.FirmaFun firmaFun = new FirmaFun(driver);
+        Test220201LG.FirmaFun firmaFun = new FirmaFun(driver);
         firmaFun.firmarfuncionario();
         WebElement fileingresar = driver.findElement(By.xpath("//*[@id=\"btnSubmit\"]"));
         fileingresar.click();
@@ -41,36 +43,25 @@ public class EvaluarSoliGendDic {
         //ingresar folio para su busqueda
         WebElement folio = driver.findElement(By.xpath("//*[@id=\"idNumFolio\"]"));
         folio.sendKeys(folioGenerado);
+
         //precionamos bton busqueda
         WebElement btnBuscar = driver.findElement(By.xpath("//*[@id=\"buscarTareasFuncionario\"]"));
         btnBuscar.click();
+
         //dobldeclick sobre el registro
-                dobleClickEnElemento("//*[@id=\"1\"]/td[4]");
+        dobleClickEnElemento("//*[@id=\"1\"]/td[4]");
 
-        //seleccionar generar dictamen
-        WebElement genDic = driver.findElement(By.xpath("//*[@id=\"link_1\"]/label"));
-        genDic.click();
 
-        //precionar btn continuar
-        WebElement btnCont = driver.findElement(By.xpath("//*[@id=\"acciones\"]/input"));
-        btnCont.click();
+        //precionar btn observar
+        WebElement btnObs = driver.findElement(By.xpath("//*[@id=\"acciones\"]/input[1]"));
+        btnObs.click();
 
-        //btn siguiente
-        WebElement btnSiguiente = driver.findElement(By.xpath("//*[@id=\"acciones\"]/input[1]"));
-        btnSiguiente.click();
+        WebElement textJust = driver.findElement(By.xpath("//*[@id=\"requerimientoSolicitud\"]/div[4]/div/textarea"));
+        textJust.sendKeys("Esto es una justificacion de preuba de automatización");
 
-        //Sentido Dictamen Aceptado
-        WebElement Aceptado = driver.findElement(By.xpath("//*[@id=\"Aceptado\"]/input"));
-        Aceptado.click();
-        WebElement Descripcion = driver.findElement(By.xpath("//*[@id=\"valueTA\"]"));
-        Descripcion.sendKeys("PRUEBA QA JOSSUE AUTOMATIZACIÓN");
-
-        //GUARDAR Y FIRMAR
-        WebElement btnGyF = driver.findElement(By.xpath("//*[@id=\"acciones\"]/input[4]"));
-        btnGyF.click();
-        firmaFun.firmarfuncionario();
-        WebElement firm = driver.findElement(By.xpath("//*[@id=\"btnSubmit\"]"));
-        firm.click();
+        //Gen Observ
+        WebElement btnObserv = driver.findElement(By.xpath("//*[@id=\"acciones\"]/input[2]"));
+        btnObserv.click();
 
     }
 
@@ -94,7 +85,4 @@ public class EvaluarSoliGendDic {
         }
         driver.close(); // Cierra el navegador
     }
-
-
-
 }

@@ -16,7 +16,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.interactions.Actions;
 
-public class GenerarFolio {
+public class GenerarFolio1 {
     public WebDriver driver;
     String uuid = UUID.randomUUID().toString();
     int longitudDeseada = 16;
@@ -80,12 +80,12 @@ public class GenerarFolio {
         tramite_220201.click();
 
 //selecciona pestaña "Datos de la Solicitud"
-        WebElement solicitud =driver.findElement(By.xpath("//*[@id=\"ui-id-2\"]"));
+        WebElement solicitud =driver.findElement(By.id("ui-id-2"));
         solicitud.click();
 
 //flujo corto
 //dar Dobleclick sobre un registro para cargar los datos de uno previo
-        dobleClickEnElemento("//*[@id=\"5\"]/td[5]");
+        dobleClickEnElemento("//*[@id=\"3\"]/td[5]");
 
 //con los datos precargados pasamos a continuar
         WebElement btnContinuar = driver.findElement(By.xpath("//*[@id=\"guardarSolicitud\"]"));
@@ -115,21 +115,16 @@ public class GenerarFolio {
         btnFirmar.click();
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 
-//Obtener Folio
-        // Encuentra el elemento
+        // Obtener Folio
         WebElement folioElement = driver.findElement(By.xpath("//*[@id=\"notification\"]/div/ul/li"));
-
-        // Obtén el texto del elemento
         String folioText = folioElement.getText();
-
-        // Usa una expresión regular para extraer el texto entre los símbolos <>
         Pattern pattern = Pattern.compile("<([^>]*)>");
         Matcher matcher = pattern.matcher(folioText);
+        String folioNumber = null;
 
         if (matcher.find()) {
-            String folioNumber = matcher.group(1);
+            folioNumber = matcher.group(1);
             System.out.println("Número de folio: " + folioNumber);
-
         } else {
             System.out.println("No se encontró el número de folio.");
         }

@@ -1,20 +1,19 @@
-package Test220201;
+package Test220201LG;
 
-import java.util.concurrent.TimeUnit;
-
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.After;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.interactions.Actions;
 
-public class ConfirmarNotificacionResGuber {
+import java.util.concurrent.TimeUnit;
+
+public class ConfirmarNotificacionResGuber12 {
     public WebDriver driver;
-    String folioGenerado = "1502200200120240302000046";
+    String folioGenerado = "1502200200120240301000015";
 
     @Before
     public void inicializar() {
@@ -23,14 +22,14 @@ public class ConfirmarNotificacionResGuber {
     }
 
     @Test
-    public void GenerarFolio() throws InterruptedException {
+    public void ConfirmarNotificacionResGuber12() throws InterruptedException {
 //Inicia la pagina.
         driver.get("https://wwwqa.ventanillaunica.gob.mx/ventanilla-HA/authentication.action?showLogin=");
         driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
         driver.manage().window().maximize();
 
 //Login con firma.
-        Test220201.FirmaSoli firmaSoli = new FirmaSoli(driver);
+        Test220201LG.FirmaSoli firmaSoli = new FirmaSoli(driver);
         firmaSoli.firmarsolicitante();
         WebElement fileingresar = driver.findElement(By.className("btn-primary"));
         fileingresar.click();
