@@ -5,6 +5,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.UUID;
 
+import ConDBReasigSoliFun.ConDBReasigSolFun;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.After;
@@ -20,13 +21,13 @@ public class GenerarFolio1 {
     public WebDriver driver;
     String uuid = UUID.randomUUID().toString();
     int longitudDeseada = 16;
+    String FunSolRFC = "MAVL621207C95";
     String llavePago = uuid.replace("-", "").substring(0, longitudDeseada);
     String urlLog = "https://wwwqa.ventanillaunica.gob.mx/ventanilla-HA/authentication.action?showLogin=";
 
     @Before
     public void inicializar() {
-        System.setProperty("webdriver.chrome.driver", "C:\\Users\\JNoeMC\\IdeaProjects\\Tramites-Vucem2\\src\\test\\resources\\Cargadocumento\\chromedriver.exe");
-
+        System.setProperty("webdriver.chrome.driver", "C:\\Users\\JNoeMC\\IdeaProjects\\Tramites-Vucem2\\src\\test\\resources\\Cargadocumento\\WebD\\chromedriver.exe");
         ChromeOptions chromeOptions = new ChromeOptions();
         chromeOptions.addArguments("--remote-allow-origins=*");
         chromeOptions.addArguments(new String[] { "--disablenotifications"});
@@ -129,6 +130,9 @@ public class GenerarFolio1 {
             System.out.println("No se encontró el número de folio.");
         }
 
+        ConDBReasigSolFun CDBRSF = new ConDBReasigSolFun();
+        // Llamar al metodo queryByFolio con el parámetro deseado
+        CDBRSF.processFolio(folioNumber, FunSolRFC);
     }
 
     public void dobleClickEnElemento(String xpath) {

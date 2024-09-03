@@ -1,6 +1,7 @@
 package Test220201;
 import java.util.concurrent.TimeUnit;
 
+import ConDBReasigSoliFun.ConDBReasigSolFun;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.After;
@@ -9,20 +10,27 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.interactions.Actions;
+
 public class EvaluarSoliGendDic2 {
     public WebDriver driver;
-    String folioGenerado = "1502200200120240301000011";
-
+    String folioNumber = "1502200200120240301000029";
+    String FunSolRFC = "MAVL621207C95";
 
     @Before
     public void inicializar() {
-        System.setProperty("webdriver.chrome.driver", "C:\\Users\\JNoeMC\\IdeaProjects\\Tramites-Vucem2\\src\\test\\resources\\Cargadocumento\\chromedriver.exe");
-        driver = new ChromeDriver();
+        System.setProperty("webdriver.chrome.driver", "C:\\Users\\JNoeMC\\IdeaProjects\\Tramites-Vucem2\\src\\test\\resources\\Cargadocumento\\WebD\\chromedriver.exe");
+
+        ChromeOptions chromeOptions = new ChromeOptions();
+        chromeOptions.addArguments("--remote-allow-origins=*");
+        chromeOptions.addArguments(new String[] { "--disablenotifications"});
+        chromeOptions.setCapability("acceptInsecureCerts", true);
+        driver = new ChromeDriver(chromeOptions);
     }
 
     @Test
-    public void EvaluarSoliGendDic() throws InterruptedException {
+    public void EvaluarSoliGendDic2() throws InterruptedException {
 //Inicia la pagina como Funcionario
         driver.get("https://wwwqa.ventanillaunica.gob.mx/ventanilla-HA/authentication.action?showLoginFuncionarios=");
         driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
@@ -41,7 +49,7 @@ public class EvaluarSoliGendDic2 {
 
         //ingresar folio para su busqueda
         WebElement folio = driver.findElement(By.xpath("//*[@id=\"idNumFolio\"]"));
-        folio.sendKeys(folioGenerado);
+        folio.sendKeys(folioNumber);
         //precionamos bton busqueda
         WebElement btnBuscar = driver.findElement(By.xpath("//*[@id=\"buscarTareasFuncionario\"]"));
         btnBuscar.click();
@@ -67,8 +75,9 @@ public class EvaluarSoliGendDic2 {
         Descripcion.sendKeys("PRUEBA QA JOSSUE AUTOMATIZACIÓN");
 
         //GUARDAR Y FIRMAR
-        WebElement btnGyF = driver.findElement(By.xpath("//*[@id=\"acciones\"]/input[4]"));
+        WebElement btnGyF = driver.findElement(By.xpath("/html/body/main/div[1]/div[4]/div/form/div[2]/input[4]"));
         btnGyF.click();
+
         firmaFun.firmarfuncionario();
         WebElement firm = driver.findElement(By.xpath("//*[@id=\"btnSubmit\"]"));
         firm.click();
@@ -93,6 +102,9 @@ public class EvaluarSoliGendDic2 {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+        ConDBReasigSolFun CDBRSF = new ConDBReasigSolFun();
+        // Llamar al metodo queryByFolio con el parámetro deseado
+        CDBRSF.processFolio(folioNumber, FunSolRFC);
         driver.close(); // Cierra el navegador
     }
 
